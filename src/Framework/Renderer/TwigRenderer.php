@@ -4,24 +4,24 @@ namespace Framework\Renderer;
 class TwigRenderer implements RendererInterface
 {
 
-	private $twig;
+    private $twig;
 
-	private $loader;
+    private $loader;
 
-	public function __construct(string $path)
-	{
-		$this->loader = new \Twig_Loader_Filesystem($path);
-		$this->twig = new \Twig_Environment($this->loader, []);
-	}
+    public function __construct(\Twig_Loader_Filesystem $loader, \Twig_Environment $twig)
+    {
+        $this->loader = $loader;
+        $this->twig = $twig;
+    }
 
-	/**
+    /**
      * Permet de rajouter un chamin pour charger les vues
      * @param string $namespace
      * @param null|string $path
      */
     public function addPath(string $namespace, ?string $path = null): void
     {
-    	$this->loader->addPath($path, $namespace);
+        $this->loader->addPath($path, $namespace);
     }
 
     /**
@@ -35,7 +35,7 @@ class TwigRenderer implements RendererInterface
      */
     public function render(string $view, array $params = []): string
     {
-    	return $this->twig->render($view . '.twig', $params);
+        return $this->twig->render($view . '.twig', $params);
     }
 
     /**
@@ -46,6 +46,6 @@ class TwigRenderer implements RendererInterface
      */
     public function addGlobal(string $key, $value): void
     {
-    	$this->twig->addGlobal($key, $value);
+        $this->twig->addGlobal($key, $value);
     }
 }
