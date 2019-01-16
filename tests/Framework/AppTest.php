@@ -5,7 +5,9 @@ use App\Blog\BlogModule;
 use Framework\App;
 use GuzzleHttp\Psr7\ServerRequest;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 use Tests\Framework\Modules\ErroredModule;
+use Tests\Framework\Modules\StringModule;
 
 class AppTest extends TestCase
 {
