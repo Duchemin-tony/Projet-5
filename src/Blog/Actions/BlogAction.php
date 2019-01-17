@@ -12,7 +12,9 @@ class BlogAction
 	*/
 	private $renderer;
 
-	public function __construct(RendererInterface $renderer)
+	private $pdo;
+
+	public function __construct(RendererInterface $renderer, \PDO $pdo)
 	{
 		$this->renderer = $renderer;
 	}
@@ -30,7 +32,10 @@ class BlogAction
 
     public function index(): string
     {
-        return $this->renderer->render('@blog/index');
+    	$posts = $this->pdo
+    	->query('SELECT * FROM posts ORDER BY created_at DESC LIMIT 10')
+    	->fetchAll();
+        return $this->renderer->render('@blog/index', compact('posts'));
     }
 
     public function show(string $slug): string
