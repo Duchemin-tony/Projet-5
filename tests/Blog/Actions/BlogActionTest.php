@@ -38,10 +38,10 @@ class BlogActionTest extends TestCase
         );
     }
 
-    public function makePost(int $id, string $slug): \stdClass
+    public function makePost(int $id, string $slug): Post
     {
         // Article
-        $post = new \stdClass();
+        $post = new Post();
         $post->id = $id;
         $post->slug = $slug;
         return $post;

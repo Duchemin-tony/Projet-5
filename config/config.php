@@ -14,8 +14,10 @@ return [
     'database.name' => 'projet4',
     'views.path' => dirname(__DIR__) . '/views',
     'twig.extensions' => [
-        \DI\get(RouterTwigExtension::class),
-        \DI\get(PagerFantaExtension::class)
+      \DI\get(RouterTwigExtension::class),
+      \DI\get(PagerFantaExtension::class),
+      \DI\get(TextExtension::class),
+      \DI\get(TimeExtension::class)
     ],
     \Framework\Router::class => \DI\autowire(),
     RendererInterface::class => \DI\factory(TwigRendererFactory::class),
