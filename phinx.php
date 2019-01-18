@@ -27,5 +27,6 @@ return [
             'pass' => $app->getContainer()->get('database.password'),
             'charset' => 'utf8'
         ]
+        
     ]
 ];

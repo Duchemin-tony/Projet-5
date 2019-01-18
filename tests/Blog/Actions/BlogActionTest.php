@@ -3,6 +3,7 @@
 namespace Tests\App\Blog\Actions;
 
 use App\Blog\Actions\BlogAction;
+use App\Blog\Entity\Post;
 use App\Blog\Table\PostTable;
 use Framework\Renderer\RendererInterface;
 use Framework\Router;
