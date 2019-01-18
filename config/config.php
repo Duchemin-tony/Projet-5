@@ -3,6 +3,9 @@
 use Framework\Renderer\RendererInterface;
 use Framework\Renderer\TwigRendererFactory;
 use Framework\Router\RouterTwigExtension;
+use Framework\Twig\{
+    PagerFantaExtension, TextExtension, TimeExtension
+};
 
 return [
     'database.host' => 'localhost:8889',
@@ -11,7 +14,8 @@ return [
     'database.name' => 'projet4',
     'views.path' => dirname(__DIR__) . '/views',
     'twig.extensions' => [
-        \DI\get(RouterTwigExtension::class)
+        \DI\get(RouterTwigExtension::class),
+        \DI\get(PagerFantaExtension::class)
     ],
     \Framework\Router::class => \DI\autowire(),
     RendererInterface::class => \DI\factory(TwigRendererFactory::class),
