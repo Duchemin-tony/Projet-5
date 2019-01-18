@@ -12,7 +12,7 @@ class PostTableTest extends DatabaseTestCase
 	* @var PostTable
 	*/
 	private $postTable;
-	
+
 	public function setUp()
 	{
 		parent::setUp();
@@ -21,13 +21,14 @@ class PostTableTest extends DatabaseTestCase
 
 	public function testFind()
 	{
+		$this->seedDatabase();
 		$post = $this->postTable->find(1);
 		$this->assertInstanceOf(Post::class, $post);
 	}
 
 	public function testFindNotFoundRecord()
 	{
-		$post = $this->postTable->find(100000);
+		$post = $this->postTable->find(1);
 		$this->assertNull($post);
 	}
 }

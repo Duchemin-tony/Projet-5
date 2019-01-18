@@ -15,6 +15,11 @@ class DatabaseTestCase extends TestCase
 	*/
 	protected $pdo;
 
+	/**
+	* @var Manager
+	*/
+	private $manager;
+
 
 	public function setUp()
 	{
@@ -30,7 +35,15 @@ class DatabaseTestCase extends TestCase
 		$config = new Config($configArray);
 		$manager = new Manager($config, new StringInput(' '), new NullOutput());
 		$manager->migrate('test');
-		$manager->seed('test');
+		$this->manager = $manager;
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$this->pdo = $pdo;
+	}
+
+	public function seedDatabase ()
+	{
+		$this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_BOTH);
+		$this->manager->seed('test');
+		$this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+	}
 }
