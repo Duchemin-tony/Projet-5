@@ -28,6 +28,7 @@ class BlogModule extends Module
         {
         	$prefix = $container->get('admin.prefix');
         	$router->get("$prefix/posts", AdminBlogAction::class, 'admin.blog.index');
+            $router->get("$prefix/posts/{id:\d+}", AdminBlogAction::class, 'admin.blog.edit');
         }
     }
 

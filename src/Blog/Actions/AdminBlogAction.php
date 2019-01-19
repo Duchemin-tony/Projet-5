@@ -38,7 +38,7 @@ class AdminBlogAction
     public function __invoke(Request $request)
     {
         if ($request->getAttribute('id')) {
-            return $this->show($request);
+            return $this->edit($request);
         }
         return $this->index($request);
     }
@@ -49,5 +49,12 @@ class AdminBlogAction
         $items = $this->postTable->findPaginated(12, $params['p'] ?? 1);
 
         return $this->renderer->render('@blog/admin/index', compact('items'));
+    }
+
+    public function edit(Request $request): string
+    {
+        $item = $this->postTable->find($request->getAttribute('id'));
+
+        return $this->renderer->render('@blog/admin/edit', compact('item'));
     }
 }

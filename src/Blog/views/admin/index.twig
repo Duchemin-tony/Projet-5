@@ -16,7 +16,7 @@
       <tr>
         <td>{{ item.name }}</td>
         <td>
-
+          <a href="{{ path('admin.blog.edit', {id: item.id}) }}" class="btn btn-primary">Editer</a>
         </td>
       </tr>
       {% endfor %}
