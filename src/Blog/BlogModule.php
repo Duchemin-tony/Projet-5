@@ -1,6 +1,7 @@
 <?php
 namespace App\Blog;
 
+use App\Blog\Actions\AdminBlogAction;
 use App\Blog\Actions\BlogAction;
 use Framework\Module;
 use Framework\Renderer\RendererInterface;
@@ -26,7 +27,7 @@ class BlogModule extends Module
         if($container->has('admin.prefix'))
         {
         	$prefix = $container->get('admin.prefix');
-        	$router->get("$prefix/posts", BlogAction::class, 'admin.blog.index');
+        	$router->get("$prefix/posts", AdminBlogAction::class, 'admin.blog.index');
         }
     }
 
