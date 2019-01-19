@@ -31,4 +31,13 @@ class PostTableTest extends DatabaseTestCase
 		$post = $this->postTable->find(1);
 		$this->assertNull($post);
 	}
+
+	public function testUpdate()
+	{
+		$this->seddDatabase();
+		$this->postTable->update(1, ['name' => 'Salut', 'slug' => 'demo']);
+		$post = $this->postTable->find(1);
+		$this->assertEquals('Salut', $post->name);
+		$this->assertEquals('demo', $post->slug);
+	}
 }
