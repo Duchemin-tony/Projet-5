@@ -54,16 +54,16 @@ class PostTable
     }
 
     /**
-    * Met à jour un enregistrement au niveau de la base de données
-    *
-    * @param int $id
-    * @param array $params
-    * @return bool
-    */
+     * Met à jour un enregistrement au niveau de la base de données
+     *
+     * @param int $id
+     * @param array $params
+     * @return bool
+     */
     public function update(int $id, array $params): bool
     {
         $fieldQuery = $this->buildFieldQuery($params);
-        $params['id'] = $id;
+        $params["id"] = $id;
         $statement = $this->pdo->prepare("UPDATE posts SET $fieldQuery WHERE id = :id");
         return $statement->execute($params);
     }
@@ -91,18 +91,17 @@ class PostTable
     }
 
     /**
-    * Supprime un enregistrement
-    *
-    * @param int $id
-    * @return bool
-    */
-    public function delete(int $id):bool
+     * Supprime un enregistrment
+     * @param int $id
+     * @return bool
+     */
+    public function delete(int $id): bool
     {
         $statement = $this->pdo->prepare('DELETE FROM posts WHERE id = ?');
         return $statement->execute([$id]);
     }
 
-    private function buidFieldQuery(array $params)
+    private function buildFieldQuery(array $params)
     {
         return join(', ', array_map(function ($field) {
             return "$field = :$field";
