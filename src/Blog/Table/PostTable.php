@@ -60,11 +60,27 @@ class PostTable
     */
     public function update(int $id, array $params): bool
     {
-        $fieldQuery = join(', ', array_map(function ($field) {
-            return "$field = :$field";
-        }, array_keys($params)));
+        $fieldQuery = $this->buildFieldQuery($params);
         $params['id'] = $id;
         $statement = $this->pdo->prepare("UPDATE posts SET $fieldQuery WHERE id = :id");
         return $statement->execute($params);
+    }
+
+    public function insert(array $params): bool
+    {
+        $fields = array_keys($params);
+        $values = array_map(function ($field)
+        {
+            return ':' . $field;
+        }, $fields);
+        $statement = $this->pdo->prepare("INSERT INTO posts (" . join(',', $fields) . ") VALUES (" . join(',', $values) . ")");
+        return $statement->execute($params);
+    }
+
+    private function buidFieldQuery(array $params)
+    {
+        return join(', ', array_map(function ($field) {
+            return "$field = :$field";
+        }, array_keys($params)));
     }
 }

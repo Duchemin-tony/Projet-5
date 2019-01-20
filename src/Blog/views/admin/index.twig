@@ -4,6 +4,12 @@
 
 {% block body %}
 
+  <p class="text-right">
+    <a href=" {{ path('blog.admin.create') }}" class="btn btn-primary">
+      Ajouter un article
+    </a>
+  </p>
+
   <table class="table table-striped">
     <thead>
       <tr>
@@ -16,12 +22,12 @@
       <tr>
         <td>{{ item.name }}</td>
         <td>
-          <a href="{{ path('admin.blog.edit', {id: item.id}) }}" class="btn btn-primary">Editer</a>
+          <a href="{{ path('blog.admin.edit', {id: item.id}) }}" class="btn btn-primary">Editer</a>
         </td>
       </tr>
       {% endfor %}
   </table>
 
-  {{ paginate(items, 'blog.index') }}
+  {{ paginate(items, 'blog.admin.index') }}
 
 {% endblock %}
