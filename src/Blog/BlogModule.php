@@ -19,19 +19,15 @@ class BlogModule extends Module
 
     public function __construct(ContainerInterface $container)
     {
+        $blogPrefix = $container->get('blog.prefix');
         $container->get(RendererInterface::class)->addPath('blog', __DIR__ . '/views');
         $router = $container->get(Router::class);
         $router->get($container->get('blog.prefix'), BlogAction::class, 'blog.index');
-        $router->get($container->get('blog.prefix') . '/{slug:[a-z\-0-9]+}-{id:[0-9]+}', BlogAction::class, 'blog.show');
+        $router->get("$blogPrefix/{slug:[a-z\-0-9]+}-{id:[0-9]+}", BlogAction::class, 'blog.show');
 
-        if($container->has('admin.prefix'))
-        {
-        	$prefix = $container->get('admin.prefix');
-        	$router->get("$prefix/posts", AdminBlogAction::class, 'blog.admin.index');
-            $router->get("$prefix/posts/new", AdminBlogAction::class, 'blog.admin.create');
-            $router->post("$prefix/posts/new", AdminBlogAction::class);
-            $router->get("$prefix/posts/{id:\d+}", AdminBlogAction::class, 'blog.admin.edit');
-            $router->post("$prefix/posts/{id:\d+}", AdminBlogAction::class);
+        if ($container->has('admin.prefix')) {
+            $prefix = $container->get('admin.prefix');
+            $router->crud("$prefix/posts", AdminBlogAction::class, 'blog.admin');
         }
     }
 

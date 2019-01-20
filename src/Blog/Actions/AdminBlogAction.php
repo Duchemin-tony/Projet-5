@@ -37,6 +37,10 @@ class AdminBlogAction
 
     public function __invoke(Request $request)
     {
+        if ($request->getMethod() === 'DELETE')
+        {
+            return $this->delete($request);
+        }
         if (substr((string)$request->getUri(), -3) === 'new')
         {
             return $this->create($request);
@@ -94,6 +98,12 @@ class AdminBlogAction
         }
 
         return $this->renderer->render('@blog/admin/create', compact('item'));
+    }
+
+    public function delete(Request $request)
+    {
+        $this->postTable->delete($request->getAttribute('id'));
+        return $this->redirect('blog.admin.index');
     }
 
     private function getParams(Request $request)

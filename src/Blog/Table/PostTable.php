@@ -40,6 +40,7 @@ class PostTable
 
     /**
      * Récupère un article à partir de son ID
+     *
      * @param int $id
      * @return Post|null
      */
@@ -54,6 +55,7 @@ class PostTable
 
     /**
     * Met à jour un enregistrement au niveau de la base de données
+    *
     * @param int $id
     * @param array $params
     * @return bool
@@ -66,15 +68,38 @@ class PostTable
         return $statement->execute($params);
     }
 
+    /**
+     * Crée un nouvel enregistrement
+     *
+     * @param array $params
+     * @return bool
+     */
     public function insert(array $params): bool
     {
         $fields = array_keys($params);
-        $values = array_map(function ($field)
-        {
+        $values = array_map(function ($field) {
             return ':' . $field;
         }, $fields);
-        $statement = $this->pdo->prepare("INSERT INTO posts (" . join(',', $fields) . ") VALUES (" . join(',', $values) . ")");
+        $statement = $this->pdo->prepare(
+            "INSERT INTO posts (" .
+            join(',', $fields) .
+            ") VALUES (" .
+            join(',', $values) .
+            ")"
+        );
         return $statement->execute($params);
+    }
+
+    /**
+    * Supprime un enregistrement
+    *
+    * @param int $id
+    * @return bool
+    */
+    public function delete(int $id):bool
+    {
+        $statement = $this->pdo->prepare('DELETE FROM posts WHERE id = ?');
+        return $statement->execute([$id]);
     }
 
     private function buidFieldQuery(array $params)
