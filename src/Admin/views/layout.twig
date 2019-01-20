@@ -20,9 +20,15 @@
 
 <div class="container">
 
-    {% if session.get('success') %}
+    {% if flash('success') %}
         <div class="alert alert-success">
-          {{ session.get('success') }}  
+          {{ flash('success') }}  
+        </div>
+    {% endif %}
+
+    {% if flash('error') %}
+        <div class="alert alert-danger">
+            {{ flash('error') }}
         </div>
     {% endif %}
 
