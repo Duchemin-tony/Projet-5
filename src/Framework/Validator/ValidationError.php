@@ -1,7 +1,8 @@
 <?php
 namespace Framework\Validator;
 
-class ValidationError {
+class ValidationError
+{
 
     private $key;
     private $rule;
@@ -14,6 +15,7 @@ class ValidationError {
         'maxLength' => 'Le champs %s doit contenir moins de %d caractères',
         'betweenLength' => 'Le champs %s doit contenir entre %d et %d caractères',
         'datetime' => 'Le champs %s doit être une date valide (%s)',
+        'exists' => 'Le champs %s n\'existe pas sur dans la table %s',
     ];
     /**
      * @var array
@@ -32,5 +34,4 @@ class ValidationError {
         $params = array_merge([$this->messages[$this->rule], $this->key], $this->attributes);
         return (string)call_user_func_array('sprintf', $params);
     }
-
 }

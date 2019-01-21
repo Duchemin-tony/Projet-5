@@ -1,7 +1,8 @@
 <?php
 namespace App\Blog;
 
-use App\Blog\Actions\AdminBlogAction;
+use App\Blog\Actions\CategoryCrudAction;
+use App\Blog\Actions\PostCrudAction;
 use App\Blog\Actions\BlogAction;
 use Framework\Module;
 use Framework\Renderer\RendererInterface;
@@ -13,9 +14,9 @@ class BlogModule extends Module
 
     const DEFINITIONS = __DIR__ . '/config.php';
 
-    const MIGRATIONS = __DIR__ . '/db/migrations';
+    const MIGRATIONS =  __DIR__ . '/db/migrations';
 
-    const SEEDS = __DIR__ . '/db/seeds';
+    const SEEDS =  __DIR__ . '/db/seeds';
 
     public function __construct(ContainerInterface $container)
     {
@@ -27,8 +28,9 @@ class BlogModule extends Module
 
         if ($container->has('admin.prefix')) {
             $prefix = $container->get('admin.prefix');
-            $router->crud("$prefix/posts", AdminBlogAction::class, 'blog.admin');
+            $router->crud("$prefix/posts", PostCrudAction::class, 'blog.admin');
+            $router->crud("$prefix/categories", CategoryCrudAction::class, 'blog.category.admin');
+            $router->crud("$prefix/categories", CategoryCrudAction::class, 'blog.category.admin');
         }
     }
-
 }
