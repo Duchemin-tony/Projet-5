@@ -37,7 +37,7 @@ class PostCrudAction extends CrudAction
     protected function formParams(array $params): array
     {
         $params['categories'] = $this->categoryTable->findList();
-        $params['categories']['1231232'] = 'Cateogire fake';
+        $params['categories']['1231232'] = 'Categorie fake';
         return $params;
     }
 
