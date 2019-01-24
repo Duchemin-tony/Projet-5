@@ -13,12 +13,14 @@
 </head>
 <body>
 
-<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
+<nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+    <div class="col-md-8">
   <a class="navbar-brand" href="{{ path('admin') }}">Administration</a>
-  <ul class="navbar-nav mr-auto">
+  <ul class="navbar-nav">
     {{ admin_menu() }}
   </ul>
-  <div class="navbar-nav">
+</div>
+  <div class="navbar-nav col-md-4">
     <form class="nav-item active" method="post" action="{{ path('auth.logout') }}">
       {{ csrf_input() }}
       <button class="nav-link">Se déconnecter</button>
