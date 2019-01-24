@@ -30,7 +30,7 @@ class Upload
             $targetPath = $this->addCopySuffix($this->path . DIRECTORY_SEPARATOR . $file->getClientFilename());
             $dirname = pathinfo($targetPath, PATHINFO_DIRNAME);
             if (!file_exists($dirname)) {
-                mkdir($dirname, 777, true);
+                mkdir($dirname, 755, true);
             }
             $file->moveTo($targetPath);
             $this->generateFormats($targetPath);
