@@ -1,0 +1,118 @@
+<?php
+return array (
+  0 => 
+  array (
+    'GET' => 
+    array (
+      '/admin' => '/admin',
+      '/blog' => '/blog',
+      '/admin/posts' => '/admin/posts',
+      '/admin/posts/new' => '/admin/posts/new',
+      '/admin/categories' => '/admin/categories',
+      '/admin/categories/new' => '/admin/categories/new',
+    ),
+    'POST' => 
+    array (
+      '/admin/posts/new' => '/admin/posts/new',
+      '/admin/categories/new' => '/admin/categories/new',
+    ),
+  ),
+  1 => 
+  array (
+    'GET' => 
+    array (
+      0 => 
+      array (
+        'regex' => '~^(?|/blog/([a-z\\-0-9]+)\\-([0-9]+)|/blog/category/([a-z\\-0-9]+)()()|/admin/posts/(\\d+)()()()|/admin/categories/(\\d+)()()()())$~',
+        'routeMap' => 
+        array (
+          3 => 
+          array (
+            0 => '/blog/{slug:[a-z\\-0-9]+}-{id:[0-9]+}',
+            1 => 
+            array (
+              'slug' => 'slug',
+              'id' => 'id',
+            ),
+          ),
+          4 => 
+          array (
+            0 => '/blog/category/{slug:[a-z\\-0-9]+}',
+            1 => 
+            array (
+              'slug' => 'slug',
+            ),
+          ),
+          5 => 
+          array (
+            0 => '/admin/posts/{id:\\d+}',
+            1 => 
+            array (
+              'id' => 'id',
+            ),
+          ),
+          6 => 
+          array (
+            0 => '/admin/categories/{id:\\d+}',
+            1 => 
+            array (
+              'id' => 'id',
+            ),
+          ),
+        ),
+      ),
+    ),
+    'POST' => 
+    array (
+      0 => 
+      array (
+        'regex' => '~^(?|/admin/posts/(\\d+)|/admin/categories/(\\d+)())$~',
+        'routeMap' => 
+        array (
+          2 => 
+          array (
+            0 => '/admin/posts/{id:\\d+}',
+            1 => 
+            array (
+              'id' => 'id',
+            ),
+          ),
+          3 => 
+          array (
+            0 => '/admin/categories/{id:\\d+}',
+            1 => 
+            array (
+              'id' => 'id',
+            ),
+          ),
+        ),
+      ),
+    ),
+    'DELETE' => 
+    array (
+      0 => 
+      array (
+        'regex' => '~^(?|/admin/posts/(\\d+)|/admin/categories/(\\d+)())$~',
+        'routeMap' => 
+        array (
+          2 => 
+          array (
+            0 => '/admin/posts/{id:\\d+}',
+            1 => 
+            array (
+              'id' => 'id',
+            ),
+          ),
+          3 => 
+          array (
+            0 => '/admin/categories/{id:\\d+}',
+            1 => 
+            array (
+              'id' => 'id',
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+);

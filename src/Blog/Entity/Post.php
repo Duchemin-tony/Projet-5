@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Blog\Entity;
 
 class Post
@@ -12,19 +13,34 @@ class Post
 
     public $content;
 
-    public $created_at;
+    public $createdAt;
 
-    public $updated_at;
+    public $updatedAt;
 
-    public $category_name;
+    public $image;
 
-    public function __construct()
+    public function setCreatedAt($datetime)
     {
-        if ($this->created_at) {
-            $this->created_at = new \DateTime($this->created_at);
+        if (is_string($datetime)) {
+            $this->createdAt = new \DateTime($datetime);
         }
-        if ($this->updated_at) {
-            $this->updated_at = new \DateTime($this->updated_at);
+    }
+
+    public function setUpdatedAt($datetime)
+    {
+        if (is_string($datetime)) {
+            $this->updatedAt = new \DateTime($datetime);
         }
+    }
+
+    public function getThumb()
+    {
+        ['filename' => $filename, 'extension' => $extension] = pathinfo($this->image);
+        return './uploads/posts/' . $filename . '_thumb.' . $extension;
+    }
+
+    public function getImageUrl()
+    {
+        return './uploads/posts/' . $this->image;
     }
 }
