@@ -7,7 +7,7 @@ use Framework\Router;
 
 class ContactModule extends Module
 {
-
+	const DEFINITIONS = __DIR__ . '/definitions.php';
 
     public function __construct(Router $router, RendererInterface $renderer)
     {

@@ -40,5 +40,8 @@ return [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
             ]
         );
-    }
+    },
+    // MAILER
+    'mail.to' => 'tony76i@live.fr',
+    Swift_Mailer::class => \DI\factory(\Framework\SwiftMailerFactory::class)
 ];
