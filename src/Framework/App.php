@@ -1,5 +1,4 @@
 <?php
-
 namespace Framework;
 
 use DI\ContainerBuilder;
@@ -12,12 +11,12 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class App implements RequestHandlerInterface
 {
-
     /**
      * List of modules
      * @var array
      */
     private $modules = [];
+
     /**
      * @var string
      */
@@ -40,7 +39,6 @@ class App implements RequestHandlerInterface
 
     public function __construct(string $definition)
     {
-
         $this->definition = $definition;
     }
 
@@ -82,7 +80,6 @@ class App implements RequestHandlerInterface
         $middleware = new CombinedMiddleware($this->getContainer(), $this->middlewares);
         return $middleware->process($request, $this);
     }
-
     public function run(ServerRequestInterface $request): ResponseInterface
     {
         foreach ($this->modules as $module) {
@@ -115,14 +112,18 @@ class App implements RequestHandlerInterface
     private function getMiddleware()
     {
         if (array_key_exists($this->index, $this->middlewares)) {
-            $middleware = $this->container->get($this->middlewares[$this->index]);
+            if (is_string($this->middlewares[$this->index])) {
+                $middleware = $this->container->get($this->middlewares[$this->index]);
+            } else {
+                $middleware = $this->middlewares[$this->index];
+            }
             $this->index++;
             return $middleware;
         }
         return null;
     }
 
-        /**
+    /**
      * @return array
      */
     public function getModules(): array

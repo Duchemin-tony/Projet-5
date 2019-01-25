@@ -17,7 +17,7 @@ class ValidationError
         'datetime' => 'Le champs %s doit être une date valide (%s)',
         'exists' => 'Le champs %s n\'existe pas sur dans la table %s',
         'unique' => 'Le champs %s doit être unique',
-        'filetype' => 'Le fichier %s n\'est pas au format valide (%s)',
+        'filetype' => 'Le champs %s n\'est pas au format valide (%s)',
         'uploaded' => 'Vous devez uploader un fichier'
     ];
     /**
@@ -34,7 +34,11 @@ class ValidationError
 
     public function __toString()
     {
-        $params = array_merge([$this->messages[$this->rule], $this->key], $this->attributes);
-        return (string)call_user_func_array('sprintf', $params);
+        if (!array_key_exists($this->rule, $this->messages)) {
+            return "Le champs {$this->key} ne correspond pas à la règle {$this->rule}";
+        } else {
+            $params = array_merge([$this->messages[$this->rule], $this->key], $this->attributes);
+            return (string)call_user_func_array('sprintf', $params);
+        }
     }
 }
