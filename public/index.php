@@ -1,6 +1,7 @@
 <?php
 
 use App\Admin\AdminModule;
+use App\Contact\ContactModule;
 use App\Auth\AuthModule;
 use App\Blog\BlogModule;
 use Framework\Middleware\CsrfMiddleware;
@@ -18,6 +19,7 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 
 $app = (new \Framework\App(dirname(__DIR__) . '/config/config.php'))
     ->addModule(AdminModule::class)
+    ->addModule(ContactModule::class)
     ->addModule(BlogModule::class)
     ->addModule(AuthModule::class);
 
