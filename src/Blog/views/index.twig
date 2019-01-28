@@ -20,7 +20,7 @@
 
       <div class="row">
 
-        {% for row in posts | batch(4) %}
+        {% for row in posts | batch(1) %}
           <div class="card-deck">
             {% for post in row %}
               <div class="card">
