@@ -107,23 +107,6 @@ class App implements RequestHandlerInterface
     }
 
     /**
-     * @return object
-     */
-    private function getMiddleware()
-    {
-        if (array_key_exists($this->index, $this->middlewares)) {
-            if (is_string($this->middlewares[$this->index])) {
-                $middleware = $this->container->get($this->middlewares[$this->index]);
-            } else {
-                $middleware = $this->middlewares[$this->index];
-            }
-            $this->index++;
-            return $middleware;
-        }
-        return null;
-    }
-
-    /**
      * @return array
      */
     public function getModules(): array
