@@ -5,6 +5,7 @@ use App\Contact\ContactModule;
 use App\Auth\AuthModule;
 use App\Blog\BlogModule;
 use Framework\Auth\RoleMiddlewareFactory;
+use Framework\Middleware\RendererRequestMiddleware;
 use Framework\Middleware\CsrfMiddleware;
 use Framework\Middleware\{
     DispatcherMiddleware,
@@ -37,7 +38,8 @@ $app->pipe(Whoops::class)
     ->pipe(CsrfMiddleware::class)
     ->pipe(RouterMiddleware::class)
     ->pipe(DispatcherMiddleware::class)
-    ->pipe(NotFoundMiddleware::class);
+    ->pipe(NotFoundMiddleware::class)
+    ->pipe(RendererRequestMiddleware::class);
 
 if (php_sapi_name() !== "cli") {
     $response = $app->run(ServerRequest::fromGlobals());

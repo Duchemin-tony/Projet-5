@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title "Mon site " %}</title>
+    <title>{% block title "Tableau de bord" %}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css"
           integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
           <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.5.2/flatpickr.css">
@@ -23,7 +23,7 @@
   <div class="navbar-nav col-md-4">
     <form class="nav-item active" method="post" action="{{ path('auth.logout') }}">
       {{ csrf_input() }}
-      <button class="nav-link">Se déconnecter</button>
+      <button class="btn btn-danger">Se déconnecter</button>
     </form>
   </div>
 </nav>
