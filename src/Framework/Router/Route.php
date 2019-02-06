@@ -56,7 +56,7 @@ class Route
 	* Retrieve the URL parameters
 	* @return string[]
 	*/
-	public function getParams(): array 
+	public function prePersist(): array 
 	{
 		return $this->parameters;
 	}

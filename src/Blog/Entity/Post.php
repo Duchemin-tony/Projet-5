@@ -19,6 +19,8 @@ class Post
 
     public $image;
 
+    public $comment;
+
     public function setCreatedAt($datetime)
     {
         if (is_string($datetime)) {

@@ -2,5 +2,6 @@ vendor
 composer.lock
 composer.phar
 /public/uploads
-tmp
-tests
+/tmp
+/tests
+/downloads

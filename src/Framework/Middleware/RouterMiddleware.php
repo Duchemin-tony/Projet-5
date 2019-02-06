@@ -30,7 +30,7 @@ class RouterMiddleware implements MiddlewareInterface
         if (is_null($route)) {
             return $handler->handle($request);
         }
-        $params = $route->getParams();
+        $params = $route->prePersist();
         $request = array_reduce(array_keys($params), function ($request, $key) use ($params) {
             return $request->withAttribute($key, $params[$key]);
         }, $request);

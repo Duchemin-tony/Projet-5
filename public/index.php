@@ -1,9 +1,11 @@
 <?php
 
+use App\Account\AccountModule;
 use App\Admin\AdminModule;
 use App\Contact\ContactModule;
 use App\Auth\AuthModule;
 use App\Blog\BlogModule;
+use App\Shop\ShopModule;
 use Framework\Auth\RoleMiddlewareFactory;
 use Framework\Middleware\RendererRequestMiddleware;
 use Framework\Middleware\CsrfMiddleware;
@@ -22,9 +24,10 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 $app = (new \Framework\App(dirname(__DIR__) . '/config/config.php'))
     ->addModule(AdminModule::class)
     ->addModule(ContactModule::class)
+    ->addModule(ShopModule::class)
     ->addModule(BlogModule::class)
     ->addModule(AuthModule::class)
-    ->addModule(\App\Account\AccountModule::class);
+    ->addModule(AccountModule::class);
 
 $container = $app->getContainer();
 $app->pipe(Whoops::class)
