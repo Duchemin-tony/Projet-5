@@ -5,3 +5,4 @@ composer.phar
 /tmp
 /tests
 /downloads
+config.php

@@ -2,6 +2,7 @@
 
 namespace Framework;
 
+use Framework\Middleware\CallableMiddleware;
 use Framework\Router\Route;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Expressive\Router\FastRouteRouter;
@@ -17,9 +18,12 @@ class Router
      */
     private $router;
 
-    public function __construct()
+    public function __construct(?string $cache = null)
     {
-        $this->router = new FastRouteRouter();
+        $this->router = new FastRouteRouter(null, null, [
+            FastRouteRouter::CONFIG_CACHE_ENABLED => !is_null($cache),
+            FastRouteRouter::CONFIG_CACHE_FILE    => $cache
+        ]);
     }
 
     /**
