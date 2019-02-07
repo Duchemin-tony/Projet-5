@@ -2,6 +2,8 @@
 namespace Framework;
 
 use DI\ContainerBuilder;
+use Doctrine\Common\Cache\ApcuCache;
+use Doctrine\Common\Cache\FilesystemCache;
 use Framework\Middleware\CombinedMiddleware;
 use Framework\Middleware\RoutePrefixedMiddleware;
 use Psr\Container\ContainerInterface;
@@ -18,9 +20,9 @@ class App implements RequestHandlerInterface
     private $modules = [];
 
     /**
-     * @var string
+     * @var array
      */
-    private $definition;
+    private $definitions;
 
     /**
      * @var ContainerInterface
@@ -30,16 +32,26 @@ class App implements RequestHandlerInterface
     /**
      * @var string[]
      */
-    private $middlewares;
+    private $middlewares = [];
 
     /**
      * @var int
      */
     private $index = 0;
 
-    public function __construct(string $definition)
+    /**
+     * App constructor.
+     * @param null|string|array $definitions
+     */
+    public function __construct($definitions = [])
     {
-        $this->definition = $definition;
+        if (is_string($definitions)) {
+            $definitions = [$definitions];
+        }
+        if (!$this->isSequential($definitions)) {
+            $definitions = [$definitions];
+        }
+        $this->definitions = $definitions;
     }
 
     /**
@@ -95,12 +107,22 @@ class App implements RequestHandlerInterface
     {
         if ($this->container === null) {
             $builder = new ContainerBuilder();
-            $builder->addDefinitions($this->definition);
+            $env = getenv('ENV') ?: 'production';
+            if ($env === 'production') {
+                $builder->setDefinitionCache(new FilesystemCache('tmp/di'));
+                $builder->writeProxiesToFile(true, 'tmp/proxies');
+            }
+            foreach ($this->definitions as $definition) {
+                $builder->addDefinitions($definition);
+            }
             foreach ($this->modules as $module) {
                 if ($module::DEFINITIONS) {
                     $builder->addDefinitions($module::DEFINITIONS);
                 }
             }
+            $builder->addDefinitions([
+                App::class => $this
+            ]);
             $this->container = $builder->build();
         }
         return $this->container;
@@ -112,5 +134,13 @@ class App implements RequestHandlerInterface
     public function getModules(): array
     {
         return $this->modules;
+    }
+
+    private function isSequential(array $array): bool
+    {
+        if (empty($array)) {
+            return true;
+        }
+        return array_keys($array) === range(0, count($array) - 1);
     }
 }

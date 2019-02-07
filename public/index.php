@@ -19,9 +19,11 @@ use Framework\Middleware\{
 use GuzzleHttp\Psr7\ServerRequest;
 use Middlewares\Whoops;
 
-require dirname(__DIR__) . '/vendor/autoload.php';
+chdir(dirname(__DIR__));
 
-$app = (new \Framework\App(dirname(__DIR__) . '/config/config.php'))
+require 'vendor/autoload.php';
+
+$app = (new \Framework\App(['config/config.php', 'config.php']))
     ->addModule(AdminModule::class)
     ->addModule(ContactModule::class)
     ->addModule(ShopModule::class)
@@ -30,6 +32,7 @@ $app = (new \Framework\App(dirname(__DIR__) . '/config/config.php'))
     ->addModule(AccountModule::class);
 
 $container = $app->getContainer();
+$container->get(\Framework\Router::class)->get('/', \App\Blog\Actions\PostIndexAction::class, 'home');
 $app->pipe(Whoops::class)
     ->pipe(TrailingSlashMiddleware::class)
     ->pipe(\App\Auth\ForbiddenMiddleware::class)
@@ -38,7 +41,7 @@ $app->pipe(Whoops::class)
         $container->get(RoleMiddlewareFactory::class)->makeForRole('admin')
     )
     ->pipe(MethodMiddleware::class)
-    ->pipe(CsrfMiddleware::class)
+    //->pipe(CsrfMiddleware::class)
     ->pipe(RouterMiddleware::class)
     ->pipe(DispatcherMiddleware::class)
     ->pipe(NotFoundMiddleware::class)
