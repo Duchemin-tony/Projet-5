@@ -29,7 +29,8 @@ $app = (new \Framework\App(['config/config.php', 'config.php']))
     ->addModule(ShopModule::class)
     ->addModule(BlogModule::class)
     ->addModule(AuthModule::class)
-    ->addModule(AccountModule::class);
+    ->addModule(AccountModule::class)
+    ->addModule(\App\Basket\BasketModule::class);
 
 $container = $app->getContainer();
 $container->get(\Framework\Router::class)->get('/', \App\Blog\Actions\PostIndexAction::class, 'home');
@@ -41,7 +42,7 @@ $app->pipe(Whoops::class)
         $container->get(RoleMiddlewareFactory::class)->makeForRole('admin')
     )
     ->pipe(MethodMiddleware::class)
-    //->pipe(CsrfMiddleware::class)
+    ->pipe(CsrfMiddleware::class)
     ->pipe(RouterMiddleware::class)
     ->pipe(DispatcherMiddleware::class)
     ->pipe(NotFoundMiddleware::class)

@@ -4,7 +4,7 @@
     <title>{% block title "..." %}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css"
           integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css">
     <style>
         body {
             padding-top: 5rem;
@@ -40,6 +40,11 @@
                 <button class="btn btn-danger">Se déconnecter</button>
             </form>
         {% else %}
+            {% if module_enabled('basket') %}
+            <div class="nav-item">
+                <a href="{{ path('basket') }}" class="nav-link"><span class="oi oi-basket"></span> Mon panier ({{ basket_count() }})</a>
+            </div>
+            {% endif %}
             <div class="nav-item active">
                 <a class="nav-link" href="{{ path('auth.login') }}">Se connecter</a>
             </div>
