@@ -1,6 +1,4 @@
 <?php
-
-
 namespace App\Basket;
 
 use App\Shop\Entity\Product;
@@ -21,6 +19,9 @@ class SessionBasket extends Basket
         $this->rows = array_map(function ($row) {
             $r = new BasketRow();
             $r->setProductId($row['id']);
+            $product = new Product();
+            $product->setId($row['id']);
+            $r->setProduct($product);
             $r->setQuantity($row['quantity']);
             return $r;
         }, $rows);
@@ -35,6 +36,12 @@ class SessionBasket extends Basket
     public function removeProduct(Product $product): void
     {
         parent::removeProduct($product);
+        $this->persist();
+    }
+
+    public function empty()
+    {
+        parent::empty();
         $this->persist();
     }
 
