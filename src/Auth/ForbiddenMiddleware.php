@@ -51,6 +51,6 @@ class ForbiddenMiddleware implements \Psr\Http\Server\MiddlewareInterface
     {
         $this->session->set('auth.redirect', $request->getUri()->getPath());
         (new FlashService($this->session))->error('Vous devez posséder un compte pour accéder à cette page');
-        return new RedirectResponse($this->loginPath);
+        return new RedirectResponse('/');
     }
 }

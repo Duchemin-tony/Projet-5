@@ -10,7 +10,7 @@
 
   <div class="row">
 
-    {% for row in products | batch(4) %}
+    {% for row in products | batch(2) %}
       <div class="card-deck">
         {% for product in row %}
           <div class="card">

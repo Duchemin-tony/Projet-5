@@ -94,7 +94,7 @@ class CrudAction
     public function index(Request $request): string
     {
         $params = $request->getQueryParams();
-        $items = $this->table->findAll()->paginate(12, $params['p'] ?? 1);
+        $items = $this->table->findAll()->paginate(50, $params['p'] ?? 1);
 
         return $this->renderer->render($this->viewPath . '/index', compact('items'));
     }

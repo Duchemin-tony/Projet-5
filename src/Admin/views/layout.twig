@@ -1,31 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title "Tableau de bord" %}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css"
           integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
-          <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.5.2/flatpickr.css">
-    <style>
-        body {
-            padding-top: 5rem;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.5.2/flatpickr.css">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel|Lobster" rel="stylesheet">
+        <!-- Bootstrap core CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
+<style>
+  body {
+    padding-top: 5rem;
+}
+</style>
 <body>
 
-<nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
-    <div class="col-md-8">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <div class="container">
   <a class="navbar-brand" href="{{ path('admin') }}">Administration</a>
-  <ul class="navbar-nav">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsed" aria-controls="collapsed" aria-expanded="false" aria-label="Toggle navigation"><span class="toggler"></span></button>
+        <div class="navbar-collapse collapse" id="collapsed">
+  <ul class="navbar-nav ml-auto">
+        <li class="nav-item {{ is_subpath('blog.index') ? 'active' }}">
+            <a class="nav-link" href="{{ path('blog.index') }}">Blog</a>
+        </li>
     {{ admin_menu() }}
   </ul>
-</div>
-  <div class="navbar-nav col-md-4">
+
+  
     <form class="nav-item active" method="post" action="{{ path('auth.logout') }}">
       {{ csrf_input() }}
       <button class="btn btn-danger">Se déconnecter</button>
     </form>
   </div>
+</div>
 </nav>
 
 <div class="container">
@@ -45,10 +56,9 @@
   {% block body %}{% endblock %}
 
 </div><!-- /.container -->
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"
-        integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK"
-        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.5.2/flatpickr.js"></script>
 <script>
   flatpickr('.datepicker', {

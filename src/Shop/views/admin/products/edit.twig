@@ -1,10 +1,10 @@
 {% extends '@admin/layout.twig' %}
 
-{% block title "Editer l'article" %}
+{% block title "Editer les produits" %}
 
 {% block body %}
 
-  <h1>Editer l'article {{ item.name }}</h1>
+  <h1>Editer le produit "{{ item.name }}"</h1>
 
   <form action="{{ path(routePrefix ~ '.edit', {id: item.id}) }}" method="post" enctype="multipart/form-data">
     {% include viewPath ~ '/form.twig' %}

@@ -20,22 +20,22 @@
 
       <div class="row">
 
-        {% for row in posts | batch(1) %}
+        {% for row in posts | batch(2) %}
           <div class="card-deck">
             {% for post in row %}
               <div class="card">
                 {% if post.categoryName %}
-                  <div class="card-header">{{ post.categoryName }}</div>
+                  <div class="card-header"><h6>{{ post.categoryName }}</h6></div>
                 {% endif %}
                 {% if post.image %}
                   <img src="{{ post.thumb }}" alt="{{ post.name }}" style="width:100%;">
                 {% endif %}
                 <div class="card-block">
-                  <h4 class="card-title">
+                  <h5 class="card-title">
                     <a href="{{ path('blog.show', {slug: post.slug, id: post.id}) }}">
                       {{ post.name }}
                     </a>
-                  </h4>
+                  </h5>
                   <p class="card-text">
                     {{ post.content | excerpt | nl2br }}
                   </p>
@@ -59,6 +59,7 @@
       {% endif %}
     </div>
     <div class="col-md-3">
+    <h2>Catégories</h2>
       <ul class="list-group">
         {% for c in categories %}
           <li class="list-group-item {% if c.id == category.id %}active{% endif %}">
@@ -66,6 +67,7 @@
           </li>
         {% endfor %}
       </ul>
+      <div id="calendar" class="calendar"></div>
     </div>
   </div>
 
