@@ -9,7 +9,7 @@ interface RendererInterface
      * @param string $namespace
      * @param null|string $path
      */
-    public function addPath(string $namespace, ?string $path = null): void ;
+    public function addPath(string $namespace, ?string $path = null);
 
     /**
      * Permet de rendre une vue

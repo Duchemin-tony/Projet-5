@@ -16,7 +16,7 @@ class TwigRenderer implements RendererInterface
      * @param string $namespace
      * @param null|string $path
      */
-    public function addPath(string $namespace, ?string $path = null): void
+    public function addPath(string $namespace, ?string $path = null)
     {
         $this->twig->getLoader()->addPath($path, $namespace);
     }
