@@ -3,13 +3,6 @@
 
 {% block body %}
 
-
-  {% if flash('error') %}
-    <div class="alert alert-danger">
-      {{ flash('error') }}
-    </div>
-  {% endif %}
-
   <form action="" method="post">
     {{ csrf_input() }}
     {{ field('password', null, 'Mot de passe', {type: 'password'}) }}

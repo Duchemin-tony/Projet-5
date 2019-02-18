@@ -110,6 +110,16 @@ button
   color:#fff;
 }
 
-/*---- Pagination ----*/
-
+@media all and (max-width:766px) 
+{
+  #navbar-dekstop, #title-dekstop {
+    display: none;
+  }
+}
+@media all and (min-width:766px) 
+{
+  #navbar-phone, #title-phone {
+    display: none;
+  }
+}
 

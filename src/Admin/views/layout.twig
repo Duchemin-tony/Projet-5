@@ -15,27 +15,47 @@
   body {
     padding-top: 5rem;
 }
+@media all and (max-width:766px) 
+{
+  #navbar-dekstop, #title-dekstop {
+    display: none;
+  }
+}
+@media all and (min-width:766px) 
+{
+  #navbar-phone, #title-phone {
+    display: none;
+  }
+}
 </style>
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <div class="container">
+    <div class="container" id="navbar-dekstop">
   <a class="navbar-brand" href="{{ path('admin') }}">Administration</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsed" aria-controls="collapsed" aria-expanded="false" aria-label="Toggle navigation"><span class="toggler"></span></button>
-        <div class="navbar-collapse collapse" id="collapsed">
   <ul class="navbar-nav ml-auto">
         <li class="nav-item {{ is_subpath('blog.index') ? 'active' }}">
             <a class="nav-link" href="{{ path('blog.index') }}">Blog</a>
         </li>
     {{ admin_menu() }}
-  </ul>
-
-  
-    <form class="nav-item active" method="post" action="{{ path('auth.logout') }}">
+        <form class="nav-item active" method="post" action="{{ path('auth.logout') }}">
       {{ csrf_input() }}
       <button class="btn btn-danger">Se déconnecter</button>
     </form>
-  </div>
+  </ul>
+</div>
+<div class="container" id="navbar-phone">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsed" aria-controls="collapsed" aria-expanded="false" aria-label="Toggle navigation"><span class="toggler"></span></button>
+  <ul class="navbar-nav ml-auto collapse" id="collapsed">
+        <li class="nav-item {{ is_subpath('blog.index') ? 'active' }}">
+            <a class="nav-link" href="{{ path('blog.index') }}">Blog</a>
+        </li>
+    {{ admin_menu() }}
+        <form class="nav-item active" method="post" action="{{ path('auth.logout') }}">
+      {{ csrf_input() }}
+      <button class="btn btn-danger">Se déconnecter</button>
+    </form>
+  </ul>
 </div>
 </nav>
 

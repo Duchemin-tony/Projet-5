@@ -9,6 +9,16 @@
 {% endblock %}
 
 {% block body %}
+        <div class="jumbotron">
+        <div class="container">
+          <h1 class="display-4">Salut !</h1>
+          <p><small><em>Ce site à était réalisé pour le dernier projet de la formation Développeur Web chez Openclassrooms.</em></small></p>
+          <p>Vous voulez dépasser vos limites, obtenir ce que vous désirez et vivre votre légende personnelle,<br>
+           Vous êtes au bonne endroit.</p>
+          <p>Pour profitez de la boutique inscrivez-vous</p>
+          <p><a class="btn btn-primary btn-lg" href="{{ path('account.signup') }}" role="button">Inscrivez-vous</a></p>
+        </div>
+      </div>
 
   {% if category %}
     <h1>Catégorie : {{ category.name }}{% if page > 1 %}, page {{ page }}{% endif %}</h1>

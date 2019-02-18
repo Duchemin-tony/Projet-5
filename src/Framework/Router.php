@@ -2,7 +2,6 @@
 
 namespace Framework;
 
-use Framework\Middleware\CallableMiddleware;
 use Framework\Router\Route;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Expressive\Router\FastRouteRouter;
@@ -83,7 +82,7 @@ class Router
         $this->delete("$prefixPath/{id:\d+}", $callable, "$prefixName.delete");
     }
 
-    /**
+    /** 
      * @param ServerRequestInterface $request
      * @return Route|null
      */
